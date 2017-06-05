@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { AppRegistry, View, Text, ListView, StyleSheet, TouchableHighlight } from "react-native";
+import { AppRegistry, View, Text, ListView, StyleSheet, Button } from "react-native";
 
 class Feeds extends Component {
   constructor(props, context) {
@@ -22,16 +22,17 @@ class Feeds extends Component {
   }
   render() {
     return (
-        <View>
+        <View style={styles.list}>
         <ListView
             dataSource={this.state.dataSource}
             renderRow={this.renderRow.bind(this)}
         />
-        <TouchableHighlight style={styles.button}
+        <Button style={styles.buttonText}
         onPress={this.props.onUsernameButtonClick}
-        >
-            <Text style={styles.buttonText}> Enter Username</Text>
-        </TouchableHighlight>
+        title="Enter Username"
+        color="#841584"
+        accessibilityLabel="Username to be searched on twitter"
+        />
         </View>
     );
   }
@@ -52,6 +53,9 @@ const styles = StyleSheet.create({
   label: {
       fontSize: 20,
       fontWeight: "300",
+  },
+  list: {
+      flex: 0,
   },
   button: {
       height: 60,

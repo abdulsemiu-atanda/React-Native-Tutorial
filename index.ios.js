@@ -16,9 +16,6 @@ import {
 import Twitter from "./main";
 
 export default class analysis extends Component {
-  onButtonPress() {
-    Alert.alert('Button has been pressed!');
-  }
   render() {
     return (
       <View style={styles.container}>
