@@ -21,11 +21,18 @@ export default class analysis extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Twitter />
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#F7F7F7",
+    flex: 1,
+    justifyContent: "flex-start",
+  },
+});
 
 AppRegistry.registerComponent('analysis', () => analysis);

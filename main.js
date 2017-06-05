@@ -4,8 +4,8 @@ import { AppRegistry, Text, View, StyleSheet } from "react-native";
 import Feeds from "./components/feeds"
 
 class TwitterApp extends Component {
-  constructor(props, context) {
-    super(props, context)
+  constructor() {
+    super()
     this.state = {
       trending: ["obasanjo", "atiku", "UCL"]
     }
@@ -14,7 +14,7 @@ class TwitterApp extends Component {
     return (
       <View style={styles.container}>
         <Text> Hello to every one!! </Text>
-        <Feeds />
+        <Feeds feeds={this.state.trending}/>
       </View>
     );
   }
