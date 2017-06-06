@@ -6,30 +6,18 @@
 
 import React, { Component } from 'react';
 import {
-  Alert,
   AppRegistry,
   StyleSheet,
-  Text,
   View,
-  Button
 } from 'react-native';
-import Twitter from "./main";
+import Analysis from "./config/routes/navigate";
 
-export default class analysis extends Component {
+class analysis extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Twitter />
-      </View>
+        <Analysis />
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#F7F7F7",
-    flex: 1,
-    justifyContent: "flex-start",
-  },
-});
 
 AppRegistry.registerComponent('analysis', () => analysis);

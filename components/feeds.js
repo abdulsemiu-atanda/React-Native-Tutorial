@@ -12,7 +12,13 @@ class Feeds extends Component {
     this.state = {
         dataSource: ds.cloneWithRows(props.feeds)
     }
+    this.buttonPress = this.buttonPress.bind(this);
   }
+  buttonPress() {
+      const { navigate } = this.props.navigation;
+      return navigate("Input");
+  }
+
   renderRow(feed) {
       return (
           <View style={styles.container}>
@@ -28,7 +34,7 @@ class Feeds extends Component {
             renderRow={this.renderRow.bind(this)}
         />
         <Button style={styles.buttonText}
-        onPress={this.props.onUsernameButtonClick}
+        onPress={this.buttonPress}
         title="Enter Username"
         color="#841584"
         accessibilityLabel="Username to be searched on twitter"

@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 
-import { AppRegistry, Text, View, StyleSheet, Alert } from "react-native";
-import Feeds from "./components/feeds"
+import { 
+  AppRegistry,
+  Text,
+  View,
+  StyleSheet,
+  Alert} from "react-native";
+import Feeds from "./components/feeds";
 
 class TwitterApp extends Component {
   constructor() {
@@ -10,8 +15,9 @@ class TwitterApp extends Component {
       trending: ["obasanjo", "atiku", "UCL"]
     }
   }
-  onButtonPress() {
-    Alert.alert('Button has been pressed!');
+
+  static navigationOptions = {
+    title: "Home"
   }
   render() {
     return (
@@ -19,9 +25,9 @@ class TwitterApp extends Component {
         <Text style={styles.text}> #Trending </Text>
         <Feeds
         feeds={this.state.trending}
-        onUsernameButtonClick={this.onButtonPress}
+        navigation={this.props.navigation}
         />
-      </View>
+        </View>
     );
   }
 }
