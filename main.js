@@ -1,47 +1,25 @@
 import React, { Component } from "react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import allReducers from "./reducers";
+import TwitterApp from "./components/main";
+import { View } from "react-native";
 
-import { 
-  AppRegistry,
-  Text,
-  View,
-  StyleSheet,
-  Alert} from "react-native";
-import Feeds from "./components/feeds";
+const store = createStore(allReducers);
 
-class TwitterApp extends Component {
-  constructor() {
-    super()
-    this.state = {
-      trending: ["obasanjo", "atiku", "UCL"]
-    }
-  }
-
+class App extends Component {
   static navigationOptions = {
     title: "Home"
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}> #Trending </Text>
-        <Feeds
-        feeds={this.state.trending}
+      <Provider store={store}>
+      <TwitterApp
         navigation={this.props.navigation}
-        />
-        </View>
+      />
+      </Provider>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 40,
-  },
-  text: {
-    marginLeft: 20,
-    marginBottom: 20,
-    fontSize: 15,
-    fontWeight: "700",
-    textAlign: "center",
-  }
-});
 
-export default TwitterApp;
+export default App;

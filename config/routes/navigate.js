@@ -2,11 +2,10 @@ import React from "react";
 import { StackNavigator } from "react-navigation";
 
 import UserInput from "../../components/userInput";
-import TwitterApp from "../../main";
-
-export default Analysis = StackNavigator({
+import App from "../../main";
+export default  StackNavigator({
   Home: {
-    screen: TwitterApp
+    screen: App
   },
   Input: {
     screen: UserInput,
