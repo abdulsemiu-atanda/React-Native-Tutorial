@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-
-import { AppRegistry, View, Text, ScrollView, ListView, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  ListView,
+  StyleSheet,
+  Button } from "react-native";
 
 class Feeds extends Component {
   constructor(props, context) {

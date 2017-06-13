@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  Alert,
   Button
 } from "react-native";
 import Feeds from "./feeds";
