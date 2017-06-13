@@ -6,16 +6,12 @@ const getApiGenerator = next  => (route, name) => {
   axios.get(route)
   .then(response => {
     const trends = []
-    const topTenTrends = []
     response.data[0].trends.forEach((trend, index) => {
       trends.push(trend.name);
-      if (index < 10) {
-        topTenTrends.push(trend.name);
-      }
     });
     return next({
       type: "TRENDS_FETCHED",
-      payload: topTenTrends
+      payload: trends
     });
   })
   .catch(err => {
