@@ -8,10 +8,6 @@ import { View } from "react-native";
 
 const store = createStore(allReducers, applyMiddleware(dataService));
 
-store.subscribe(() => {
-  console.log(store.getState());
-})
-
 class App extends Component {
   render() {
     return (
@@ -23,5 +19,5 @@ class App extends Component {
     );
   }
 }
-setTimeout(() => {store.dispatch({type: "FETCH_TRENDS"}) }, 2000);
+store.dispatch({type: "FETCH_TRENDS"});
 export default App;
