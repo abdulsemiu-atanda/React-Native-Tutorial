@@ -1,22 +1,37 @@
 import axios from "axios";
-const trends = [];
 
-export const trendAction = (trends) => {
-  return {
-    type: "FETCH_TRENDS",
-    payload: trends
-  }
-}
-
-export const fetchTrends = () => {
+const getApiGenerator = next  => (route, name) => {
   axios.defaults.headers.common['Authorization'] = "Bearer AAAAAAAAAAAAAAAAAAAAACB%2BwgAAAAAAA%2FQQqrGFmnEMah3WAuGubPyxvXQ%3DdAyfKNu9DBB1wC9TUOGPIiOw89q4rJwmb8KRbKT3VvNjgef5Bi";
-  axios.get("https://api.twitter.com/1.1/trends/place.json?id=23424908")
+  axios.get(route)
   .then(response => {
+    const trends = []
     response.data[0].trends.forEach((trend) => {
       trends.push(trend.name);
     });
-    console.log(response.data[0].trends);
+    console.log(trends);
+    return next({
+      type: "TRENDS_FETCHED",
+      payload: trends
+    });
   })
-  .catch(err => console.log(err));
-  trendAction(trends);
+  .catch(err => {
+    return next({
+      type: "FETCHING_ERROR",
+      payload: err
+    });
+  })
 }
+
+const dataService = store => next => action => {
+  next(action)
+  const getApi = getApiGenerator(next);
+  switch (action.type) {
+    case "FETCH_TRENDS":
+      getApi("https://api.twitter.com/1.1/trends/place.json?id=23424908", "FETCH_TRENDS");
+      break;
+    default:
+    break
+  }
+}
+
+export default dataService;

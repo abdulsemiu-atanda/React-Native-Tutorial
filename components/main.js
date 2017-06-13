@@ -1,34 +1,36 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
   AppRegistry,
   Text,
   View,
   StyleSheet,
-  Alert
+  Alert,
+  Button
 } from "react-native";
 import Feeds from "./feeds";
-import * as twitterTrends from "../actions/fetchTrends";
 
 class TwitterApp extends Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     trending: ["obasanjo", "atiku", "UCL"]
-  //   }
-  // }
-
   static navigationOptions = {
     title: "Home"
   }
+  buttonPress() {
+    const { navigate } = this.props.navigation;
+    return navigate("Input");
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> #Trending </Text>
         <Feeds
           feeds={this.props.trending}
           navigation={this.props.navigation}
+        />
+        <Button style={styles.buttonText}
+          onPress={this.buttonPress.bind(this)}
+          title="Enter Username"
+          color="#841584"
+          accessibilityLabel="Username to be searched on twitter"
         />
       </View>
     );
@@ -37,14 +39,13 @@ class TwitterApp extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 40,
+    flex: 1
   },
-  text: {
-    marginLeft: 20,
-    marginBottom: 20,
-    fontSize: 15,
-    fontWeight: "700",
-    textAlign: "center",
-  }
+  buttonText: {
+    color: "#FAFAFA",
+    fontSize: 20,
+    fontWeight: "600"
+  },
 });
 
 function mapStateProps(state) {
@@ -52,8 +53,5 @@ function mapStateProps(state) {
     trending: state.trending
   }
 }
-function mapDispatchToProps (dispatch) {
-  bindActionCreators({ trending: twitterTrends }, dispatch);
-}
 
-export default connect(mapStateProps, mapDispatchToProps)(TwitterApp);
+export default connect(mapStateProps)(TwitterApp);

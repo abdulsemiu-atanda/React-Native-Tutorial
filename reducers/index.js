@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import trendReducer from "./trendReducer";
+import twitterReducer from "./twitterTrendsReducer";
 
 const allReducers = combineReducers({
-  trending: trendReducer
+  trending: twitterReducer
 });
 
 export default allReducers;
