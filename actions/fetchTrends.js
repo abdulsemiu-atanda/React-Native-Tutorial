@@ -1,17 +1,21 @@
 import axios from "axios";
+import settings from "../private/settings/settings";
 
 const getApiGenerator = next  => (route, name) => {
-  axios.defaults.headers.common['Authorization'] = "Bearer AAAAAAAAAAAAAAAAAAAAACB%2BwgAAAAAAA%2FQQqrGFmnEMah3WAuGubPyxvXQ%3DdAyfKNu9DBB1wC9TUOGPIiOw89q4rJwmb8KRbKT3VvNjgef5Bi";
+  axios.defaults.headers.common['Authorization'] = settings.twitter.authorization;
   axios.get(route)
   .then(response => {
     const trends = []
-    response.data[0].trends.forEach((trend) => {
+    const topTenTrends = []
+    response.data[0].trends.forEach((trend, index) => {
       trends.push(trend.name);
+      if (index < 10) {
+        topTenTrends.push(trend.name);
+      }
     });
-    console.log(trends);
     return next({
       type: "TRENDS_FETCHED",
-      payload: trends
+      payload: topTenTrends
     });
   })
   .catch(err => {

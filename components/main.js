@@ -36,7 +36,7 @@ class TwitterApp extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: 20,
     flex: 1
   },
   buttonText: {
