@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-
-import { Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 class UserInput extends Component {
-
-  static navigationOptions = {
-    title: "Search"
-  }
   render() {
     return (
-      <Text>This will take inputs</Text>
+      <View>
+        <Text style={styles.text}>This will take inputs</Text>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  text: {
+    paddingTop: 40
+  }
+});
 
 export default UserInput;

@@ -35,7 +35,6 @@ class Feeds extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.text}> #Trending </Text>
         <ListView
           style={styles.listView}
           dataSource={this.state.dataSource}
@@ -60,13 +59,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 20,
     fontWeight: "300",
-  },
-  text: {
-    marginLeft: 20,
-    marginBottom: 20,
-    fontSize: 15,
-    fontWeight: "700",
-    textAlign: "center",
   },
   button: {
     height: 60,

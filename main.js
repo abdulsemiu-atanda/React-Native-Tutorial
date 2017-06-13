@@ -13,9 +13,6 @@ store.subscribe(() => {
 })
 
 class App extends Component {
-  static navigationOptions = {
-    title: "Home"
-  }
   render() {
     return (
       <Provider store={store}>
@@ -26,5 +23,5 @@ class App extends Component {
     );
   }
 }
-store.dispatch({type: "FETCH_TRENDS"});
+setTimeout(() => {store.dispatch({type: "FETCH_TRENDS"}) }, 2000);
 export default App;
