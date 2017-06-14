@@ -26,7 +26,7 @@ class UserInput extends Component {
         <Button
           onPress={this.onButtonPress}
           title="Search"
-          style={{ color: "purple" }}
+          style="#841584"
           accessibilityLabel="Dispatches action that searches twitter for input"
         />
       </View>

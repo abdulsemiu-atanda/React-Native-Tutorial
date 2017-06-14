@@ -4,18 +4,13 @@ import Icon from "react-native-vector-icons/Ionicons";
 import {
   Text,
   View,
-  StyleSheet,
-  Button
+  StyleSheet
 } from "react-native";
 import Feeds from "./feeds";
 
 class TwitterApp extends Component {
   static navigationOptions = {
     
-  }
-  buttonPress() {
-    const { navigate } = this.props.navigation;
-    return navigate("Input");
   }
 
   render() {
@@ -25,12 +20,6 @@ class TwitterApp extends Component {
         <Feeds
           feeds={this.props.trending}
           navigation={this.props.navigation}
-        />
-        <Button style={styles.buttonText}
-          onPress={this.buttonPress.bind(this)}
-          title="Enter Username"
-          color="#841584"
-          accessibilityLabel="Username to be searched on twitter"
         />
       </View>
     );
