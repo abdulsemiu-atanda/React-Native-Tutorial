@@ -13,8 +13,12 @@ class UserInput extends Component {
   onChange(text) {
     this.text = text
   }
-  onButtonPress(text) {
-    Alert.alert(`You wanna search twitter for ${this.text}`);
+  onButtonPress() {
+    if (this.text) {
+      this.props.navigation.navigate("Results", { text: this.text });
+    } else {
+      Alert.alert("Enter something in the search box");
+    }
   }
   render() {
     return (
@@ -26,7 +30,7 @@ class UserInput extends Component {
         <Button
           onPress={this.onButtonPress}
           title="Search"
-          style="#841584"
+          color="#841584"
           accessibilityLabel="Dispatches action that searches twitter for input"
         />
       </View>

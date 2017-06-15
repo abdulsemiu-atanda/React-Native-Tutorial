@@ -4,8 +4,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Platform } from "react-native";
 
 import UserInput from "../../components/userInput";
+import ResultPage from "../../components/resultsPage";
 import App from "../../main";
-export default TabNavigator({
+const MainScreen = TabNavigator({
   Home: {
     screen: App,
     navigationOptions: {
@@ -28,4 +29,16 @@ export default TabNavigator({
         />
     }
   },
+});
+
+export default MainStack = StackNavigator({
+  Home: {
+    screen: MainScreen,
+    navigationOptions: {
+      title: "Welcome"
+    }
+  },
+  Results: {
+    screen: ResultPage
+  }
 });
