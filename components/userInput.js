@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { Alert, View, Button, TextInput, StyleSheet } from "react-native";
+import settings from "../private/settings/settings";
 
 class UserInput extends Component {
   constructor(props, context) {
@@ -15,7 +17,19 @@ class UserInput extends Component {
   }
   onButtonPress() {
     if (this.text) {
-      this.props.navigation.navigate("Results", { text: this.text });
+      let searchResult;
+      const resultText = [];
+      axios.defaults.headers.common['Authorization'] = settings.twitter.authorization;
+      axios.get(`https://api.twitter.com/1.1/search/tweets.json?q=${this.text}`).then(response => {
+        searchResult = response.data.statuses;
+        searchResult.map(result => {
+          resultText.push(result.text);
+        });
+        this.props.navigation.navigate("Results", { text: resultText });
+        // console.log(searchResult);
+      }).catch(err => {
+        error = err;
+      });
     } else {
       Alert.alert("Enter something in the search box");
     }

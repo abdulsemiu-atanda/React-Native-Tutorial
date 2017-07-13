@@ -36,7 +36,6 @@ class Feeds extends Component {
     return (
       <View>
         <ListView
-          style={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
         />
