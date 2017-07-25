@@ -9,10 +9,6 @@ import {
 import Feeds from "./feeds";
 
 class TwitterApp extends Component {
-  static navigationOptions = {
-    
-  }
-
   render() {
     return (
       <View style={styles.container}>

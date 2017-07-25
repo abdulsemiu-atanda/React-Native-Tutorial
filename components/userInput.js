@@ -26,7 +26,6 @@ class UserInput extends Component {
           resultText.push(result.text);
         });
         this.props.navigation.navigate("Results", { text: resultText });
-        // console.log(searchResult);
       }).catch(err => {
         error = err;
       });
