@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import {
   View,
   ActivityIndicator,
+  RefreshControl,
   Text,
   ListView,
   StyleSheet,
   Button } from "react-native";
+import { createStore, applyMiddleware } from "redux";
+import dataService from "../actions/fetchTrends";
+import allReducers from "../reducers";
+
+const store = createStore(allReducers, applyMiddleware(dataService));
 
 class Feeds extends Component {
   constructor(props, context) {
@@ -16,7 +22,8 @@ class Feeds extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows(props.feeds),
-      animating: true
+      animating: true,
+      refreshing: false
     }
   }
 
@@ -26,6 +33,18 @@ class Feeds extends Component {
     });
     this.setState({ dataSource: ds.cloneWithRows(props.feeds) });
     this.setState({ animating: false });
+  }
+
+  onRefresh() {
+    this.setState((prevState, props) => {
+      return { refreshing: !prevState.refreshing }
+    });
+    const newDispatch = new Promise((resolve, reject)=> {
+      resolve(store.dispatch({type: "FETCH_TRENDS"}))
+    });
+    newDispatch.then(() => {
+      this.setState({refreshing: false});
+    });
   }
 
   renderRow(feed) {
@@ -48,6 +67,13 @@ class Feeds extends Component {
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this.renderRow.bind(this)}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+                title="Pull to refresh"
+              />
+            }
           />
         }
       </View>
