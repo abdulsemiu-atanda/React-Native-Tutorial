@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   View,
+  ActivityIndicator,
   Text,
   ListView,
   StyleSheet,
@@ -14,7 +15,8 @@ class Feeds extends Component {
     });
 
     this.state = {
-      dataSource: ds.cloneWithRows(props.feeds)
+      dataSource: ds.cloneWithRows(props.feeds),
+      animating: true
     }
   }
 
@@ -23,6 +25,7 @@ class Feeds extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.setState({ dataSource: ds.cloneWithRows(props.feeds) });
+    this.setState({ animating: false });
   }
 
   renderRow(feed) {
@@ -35,10 +38,18 @@ class Feeds extends Component {
   render() {
     return (
       <View>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
-        />
+        {this.state.animating ? 
+          <ActivityIndicator
+            animating={this.state.animating}
+            style={styles.spinner}
+            size="large"
+            color="blue"
+          /> :
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow.bind(this)}
+          />
+        }
       </View>
     );
   }
@@ -68,6 +79,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  spinner: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+    height: 80
+  }
 });
 
 export default Feeds;

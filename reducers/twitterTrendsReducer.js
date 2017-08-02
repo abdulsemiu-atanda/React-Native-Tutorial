@@ -1,4 +1,4 @@
-let initialState = ["obasanjo", "atiku", "UCL"]
+let initialState = []
 export default (state = initialState, action) => {
   switch (action.type) {
     case "TRENDS_FETCHED": {
