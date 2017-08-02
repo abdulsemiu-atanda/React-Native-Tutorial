@@ -17,15 +17,21 @@ class UserInput extends Component {
   }
   onButtonPress() {
     if (this.text) {
+      this.text.replace(/\s/g, '%20');
       let searchResult;
       const resultText = [];
+      const notFound = [`Aww! Snap \n No results found for ${this.text}`]
       axios.defaults.headers.common['Authorization'] = settings.twitter.authorization;
       axios.get(`https://api.twitter.com/1.1/search/tweets.json?q=${this.text}`).then(response => {
         searchResult = response.data.statuses;
         searchResult.map(result => {
           resultText.push(result.text);
         });
-        this.props.navigation.navigate("Results", { text: resultText });
+        if (resultText.length > 0) {
+          this.props.navigation.navigate("Results", { text: resultText });
+        } else {
+          this.props.navigation.navigate("Results", { text: notFound });
+        }
       }).catch(err => {
         error = err;
       });
