@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Alert, View, Button, TextInput, StyleSheet } from "react-native";
+import { Alert, View, Button, Keyboard, TextInput, StyleSheet } from "react-native";
 import settings from "../private/settings/settings";
 
 class UserInput extends Component {

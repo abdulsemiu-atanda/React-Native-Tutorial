@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, ListView, View, StyleSheet } from "react-native";
+import { Text, ListView, Keyboard, View, StyleSheet } from "react-native";
 
 class ResultPage extends Component {
   constructor(props, context) {
@@ -21,6 +21,7 @@ class ResultPage extends Component {
     );
   }
   render() {
+    Keyboard.dismiss();
     return (
       <View>
         <ListView
