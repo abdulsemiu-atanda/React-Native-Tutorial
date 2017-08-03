@@ -19,16 +19,20 @@ class UserInput extends Component {
     if (this.text) {
       this.text.replace(/\s/g, '%20');
       let searchResult;
+      let metadata = [];
       const resultText = [];
       const notFound = [`Aww! Snap \n No results found for ${this.text}`]
       axios.defaults.headers.common['Authorization'] = settings.twitter.authorization;
       axios.get(`https://api.twitter.com/1.1/search/tweets.json?q=${this.text}`).then(response => {
         searchResult = response.data.statuses;
+        // console.log(searchResult);
         searchResult.map(result => {
+          const {created_at, user } = result;
+          metadata.push({created_at, user});
           resultText.push(result.text);
         });
         if (resultText.length > 0) {
-          this.props.navigation.navigate("Results", { text: resultText });
+          this.props.navigation.navigate("Results", { text: resultText, metadata });
         } else {
           this.props.navigation.navigate("Results", { text: notFound });
         }
@@ -48,6 +52,7 @@ class UserInput extends Component {
         />
         <Button
           onPress={this.onButtonPress}
+          style={styles.button}
           title="Search"
           color="#841584"
           accessibilityLabel="Dispatches action that searches twitter for input"
@@ -70,9 +75,10 @@ const styles = StyleSheet.create({
     height: 50,
     marginRight: 10,
     marginLeft: 10,
+    marginBottom: 20,
     padding: 15,
     borderRadius: 3,
-  }
+  },
 });
 
 export default UserInput;
