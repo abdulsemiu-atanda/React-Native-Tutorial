@@ -19,22 +19,20 @@ class UserInput extends Component {
     if (this.text) {
       this.text.replace(/\s/g, '%20');
       let searchResult;
-      let metadata = [];
-      const resultText = [];
-      const notFound = [`Aww! Snap \n No results found for ${this.text}`]
+      const metadata = [];
+      const notFound = { text: `Aww! Snap \n No results found for ${this.text}` };
       axios.defaults.headers.common['Authorization'] = settings.twitter.authorization;
       axios.get(`https://api.twitter.com/1.1/search/tweets.json?q=${this.text}`).then(response => {
         searchResult = response.data.statuses;
-        // console.log(searchResult);
         searchResult.map(result => {
-          const {created_at, user } = result;
-          metadata.push({created_at, user});
-          resultText.push(result.text);
+          const { created_at, user, text, retweet_count, favorite_count } = result;
+          metadata.push({ created_at, user, text, retweet_count, favorite_count });
         });
-        if (resultText.length > 0) {
-          this.props.navigation.navigate("Results", { text: resultText, metadata });
+        console.log(metadata.length)
+        if (metadata.length > 0) {
+          this.props.navigation.navigate("Results", { text: metadata });
         } else {
-          this.props.navigation.navigate("Results", { text: notFound });
+          this.props.navigation.navigate("NotFound", { err: notFound });
         }
       }).catch(err => {
         error = err;

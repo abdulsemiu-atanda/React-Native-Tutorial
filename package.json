@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.44.0",
+    "native-base": "2.3.0",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.0",
     "react-native-vector-icons": "^4.2.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
@@ -18,9 +19,9 @@
   },
   "devDependencies": {
     "babel-jest": "20.0.3",
-    "babel-preset-react-native": "1.9.2",
-    "jest": "20.0.3",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "babel-preset-react-native": "2.1.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
   },
   "jest": {
     "preset": "react-native"

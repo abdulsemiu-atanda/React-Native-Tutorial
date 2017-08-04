@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 
 import UserInput from "../../components/userInput";
 import ResultPage from "../../components/resultsPage";
+import NotFound from "../../components/notFound";
 import App from "../../main";
 const MainScreen = TabNavigator({
   Home: {
@@ -40,5 +41,8 @@ export default MainStack = StackNavigator({
   },
   Results: {
     screen: ResultPage
+  },
+  NotFound: {
+    screen: NotFound
   }
 });

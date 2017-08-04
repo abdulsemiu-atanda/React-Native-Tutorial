@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Text, ListView, Keyboard, View, StyleSheet } from "react-native";
+import { ListView, Keyboard, View, StyleSheet } from "react-native";
+import { Text, Content, Card, CardItem, Left, Thumbnail, Body, Button, Right, Icon } from "native-base";
 
 class ResultPage extends Component {
   constructor(props, context) {
@@ -11,13 +12,44 @@ class ResultPage extends Component {
     };
   }
   static navigationOptions = {
-    title: "Search Results"
+    title: "Search"
   }
   renderRow(result) {
+    const { created_at } = result;
+    const meta = created_at.split(" ");
+    const day = meta[0] + " " + meta[1] + " " + meta[2] + " " + meta[5];
     return (
-      <View style={styles.container}>
-        <Text style={styles.label}>{result}</Text>
-      </View>
+      <Content>
+        <Card style={{ marginTop: 10, marginLeft: 10, marginRight: 10}}>
+          <CardItem>
+            <Left>
+              <Thumbnail source = {{ uri: `${result.user.profile_image_url_https}` }} />
+              <Body>
+                <Text>{result.user.name}</Text>
+                <Text note>{result.user.location}</Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem cardBody>
+            <Body>
+              <Text style={{ marginBottom: 10, marginLeft: 10 }}>{result.text}</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Left>
+              <Button transparent>
+                <Icon active name="repeat" />
+                <Text style={{ marginLeft: 5 }}>{result.retweet_count}</Text>
+                <Icon style={{ marginLeft: 10 }} active name="heart" />
+                <Text style={{ marginLeft: 5 }}>{result.favorite_count}</Text>
+              </Button>
+            </Left>
+            <Right>
+              <Text note>{day}</Text>
+            </Right>
+          </CardItem>
+        </Card>
+      </Content>
     );
   }
   render() {
@@ -33,31 +65,5 @@ class ResultPage extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#e7e7e7",
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-  },
-  label: {
-    fontSize: 20,
-    fontWeight: "300",
-  },
-  button: {
-    height: 60,
-    borderColor: "#05A5D1",
-    borderWidth: 2,
-    backgroundColor: "#333",
-    margin: 20,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-});
 
 export default ResultPage;
