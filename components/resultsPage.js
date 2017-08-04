@@ -53,7 +53,6 @@ class ResultPage extends Component {
     );
   }
   render() {
-    Keyboard.dismiss();
     return (
       <View>
         <ListView

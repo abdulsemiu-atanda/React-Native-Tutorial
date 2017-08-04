@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Alert, View, Button, Keyboard, TextInput, StyleSheet } from "react-native";
+import { ActivityIndicator, Alert, View, Keyboard, TextInput, StyleSheet } from "react-native";
+import { Button, Text, Content, Item, Input, Container } from "native-base";
 import settings from "../private/settings/settings";
 
 class UserInput extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: ""
+      text: "",
+      animating: false
     }
     this.onButtonPress = this.onButtonPress.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -16,6 +18,7 @@ class UserInput extends Component {
     this.text = text
   }
   onButtonPress() {
+    this.setState({ animating: true });
     if (this.text) {
       this.text.replace(/\s/g, '%20');
       let searchResult;
@@ -28,9 +31,9 @@ class UserInput extends Component {
           const { created_at, user, text, retweet_count, favorite_count } = result;
           metadata.push({ created_at, user, text, retweet_count, favorite_count });
         });
-        console.log(metadata.length)
         if (metadata.length > 0) {
           this.props.navigation.navigate("Results", { text: metadata });
+          this.setState({ animating: false });
         } else {
           this.props.navigation.navigate("NotFound", { err: notFound });
         }
@@ -43,19 +46,24 @@ class UserInput extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          onChangeText={this.onChange}
-        />
-        <Button
-          onPress={this.onButtonPress}
-          style={styles.button}
-          title="Search"
-          color="#841584"
-          accessibilityLabel="Dispatches action that searches twitter for input"
-        />
-      </View>
+      <Container>
+        {this.state.animating ?
+          <ActivityIndicator 
+            animating={this.state.animating}
+            style={{ alignSelf: "center", height: 80}}
+            size="large"
+            color="blue"
+          /> :
+          <Content>
+            <Item style={{ marginTop: 20, marginLeft: 10, marginRight: 10, backgroundColor: "#F7F7F7" }} regular>
+              <Input onChangeText={this.onChange} />
+            </Item>
+            <Button style={{ alignSelf: "center", marginTop: 20 }} onPress={this.onButtonPress} bordered>
+              <Text>Search</Text>
+            </Button>
+          </Content>
+        }
+      </Container>
     );
   }
 }

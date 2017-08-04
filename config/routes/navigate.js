@@ -1,6 +1,6 @@
 import React from "react";
 import { StackNavigator, TabNavigator } from "react-navigation";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Icon } from "native-base";
 import { Platform } from "react-native";
 
 import UserInput from "../../components/userInput";
@@ -14,7 +14,7 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name={(Platform.OS === "ios") ? "ios-albums-outline" : "md-albums"}
+          name="albums"
           size={32} color={tintColor}
         />
     }
@@ -25,7 +25,7 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Search",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name={(Platform.OS === "ios") ? "ios-search-outline": "md-search"}
+          name="search"
           size={32} color={tintColor}
         />
     }
