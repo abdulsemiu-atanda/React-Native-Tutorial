@@ -32,8 +32,13 @@ const MainScreen = TabNavigator({
   },
 }, {
     tabBarOptions: {
-      showIcon: true
+      activeTintColor: "blue",
+      showIcon: true,
+      style: {
+        backgroundColor: "#F7F7F7"
+      }
     },
+    tabBarPosition: "bottom",
   });
 
 export default MainStack = StackNavigator({
