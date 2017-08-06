@@ -14,8 +14,8 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name={Platform.OS === "ios" ? "albums": "home"}
-          size={32} color={tintColor}
+          name={Platform.OS === "ios" ? "ios-home-outline": "md-home"}
+          size={32} tintColor={tintColor}
         />
     }
   },
@@ -32,11 +32,19 @@ const MainScreen = TabNavigator({
   },
 }, {
     tabBarOptions: {
-      activeTintColor: "blue",
+      activeTintColor: "black",
+      inactiveTintColor: "#D3D3D3",
       showIcon: true,
       style: {
         backgroundColor: "#F7F7F7"
-      }
+      },
+      indicatorStyle:{
+        opacity: 0
+      },
+      tabStyle: {
+        height: 40
+      },
+      showLabel: false
     },
     tabBarPosition: "bottom",
   });
