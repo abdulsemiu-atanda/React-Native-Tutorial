@@ -36,6 +36,7 @@ class UserInput extends Component {
           this.setState({ animating: false });
         } else {
           this.props.navigation.navigate("NotFound", { err: notFound });
+          this.setState({ animating: false });
         }
       }).catch(err => {
         error = err;
@@ -58,7 +59,7 @@ class UserInput extends Component {
             <Item style={{ marginTop: 20, marginLeft: 10, marginRight: 10, backgroundColor: "#F7F7F7" }} regular>
               <Input onChangeText={this.onChange} />
             </Item>
-            <Button style={{ alignSelf: "center", marginTop: 20 }} onPress={this.onButtonPress} bordered>
+            <Button style={{ alignSelf: "center", marginTop: 20 }} onPress={this.onButtonPress} rounded>
               <Text>Search</Text>
             </Button>
           </Content>
