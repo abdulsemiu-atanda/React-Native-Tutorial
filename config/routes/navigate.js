@@ -14,7 +14,7 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name="albums"
+          name={Platform.OS === "ios" ? "albums": "home"}
           size={32} color={tintColor}
         />
     }
@@ -30,7 +30,11 @@ const MainScreen = TabNavigator({
         />
     }
   },
-});
+}, {
+    tabBarOptions: {
+      showIcon: true
+    },
+  });
 
 export default MainStack = StackNavigator({
   Home: {
