@@ -1,6 +1,6 @@
 import React from "react";
 import { StackNavigator, TabNavigator } from "react-navigation";
-import { Icon } from "native-base";
+import Icon from "react-native-vector-icons/Ionicons";
 import { Platform } from "react-native";
 
 import UserInput from "../../components/userInput";
@@ -14,8 +14,8 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name={Platform.OS === "ios" ? "ios-home-outline": "md-home"}
-          size={32} tintColor={tintColor}
+          name={Platform.OS === "ios" ? "ios-home" : "md-home"}
+          size={32} color={tintColor}
         />
     }
   },
@@ -25,15 +25,16 @@ const MainScreen = TabNavigator({
       tabBarLabel: "Search",
       tabBarIcon: ({ tintColor }) =>
         <Icon
-          name="search"
-          size={32} color={tintColor}
+          name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+          size={32}
+          color={tintColor}
         />
     }
   },
 }, {
     tabBarOptions: {
       activeTintColor: "black",
-      inactiveTintColor: "#D3D3D3",
+      inactiveTintColor: "#A9A9A9",
       showIcon: true,
       style: {
         backgroundColor: "#F7F7F7"

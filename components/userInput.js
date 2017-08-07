@@ -18,8 +18,8 @@ class UserInput extends Component {
     this.text = text
   }
   onButtonPress() {
-    this.setState({ animating: true });
     if (this.text) {
+      this.setState({ animating: true });
       this.text.replace(/\s/g, '%20');
       let searchResult;
       const metadata = [];
