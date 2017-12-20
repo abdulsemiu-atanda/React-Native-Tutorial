@@ -6,24 +6,16 @@
 
 import React, { Component } from 'react';
 import {
-  Alert,
   AppRegistry,
   StyleSheet,
-  Text,
   View,
-  Button
 } from 'react-native';
-import Twitter from "./main";
+import Analysis from "./config/routes/navigate";
 
-export default class analysis extends Component {
-  onButtonPress() {
-    Alert.alert('Button has been pressed!');
-  }
+class analysis extends Component {
   render() {
     return (
-      <View>
-        <Twitter />
-      </View>
+        <Analysis />
     );
   }
 }

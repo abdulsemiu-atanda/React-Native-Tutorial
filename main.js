@@ -1,28 +1,23 @@
 import React, { Component } from "react";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import allReducers from "./reducers";
+import TwitterApp from "./components/main";
+import dataService from "./actions/fetchTrends";
+import { View } from "react-native";
 
-import { AppRegistry, Text, View, StyleSheet } from "react-native";
-import Feeds from "./components/feeds"
+const store = createStore(allReducers, applyMiddleware(dataService));
 
-class TwitterApp extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      trending: ["obasanjo", "atiku", "UCL"]
-    }
-  }
+class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text> Hello to every one!! </Text>
-        <Feeds />
-      </View>
+      <Provider store={store}>
+      <TwitterApp
+        navigation={this.props.navigation}
+      />
+      </Provider>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 40,
-  },
-});
-
-export default TwitterApp;
+store.dispatch({type: "FETCH_TRENDS"});
+export default App;
